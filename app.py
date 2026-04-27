@@ -7,9 +7,9 @@ st.set_page_config(page_title="Discipline Model", layout="wide")
 st.title("Decision Drift Model Dashboard")
 
 # ---- LOAD EXISTING FILES (NO RE-SIMULATION) ----
-df = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/discipline_history.csv")
-pred = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/predicted_discipline.csv")
-raw = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/budget_data.csv")
+df = pd.read_csv("discipline_history.csv")
+pred = pd.read_csv("predicted_discipline.csv")
+raw = pd.read_csv("budget_data.csv")
 raw['date'] = pd.to_datetime(raw['date'])
 
 # Convert date
@@ -58,16 +58,22 @@ st.pyplot(fig2, use_container_width=True)
 st.subheader("Predicted Discipline")
 
 fig3, ax3 = plt.subplots(figsize=(8,3))
+
+# Ensure clean base date
 last_date = df['date'].max()
-pred['date'] = pred['date'].dt.date
 
+# Ensure future_day is clean integer
+pred['future_day'] = pred['future_day'].astype(int)
 
+# Build proper datetime axis for prediction
+pred['date'] = pd.to_datetime(last_date) + pd.to_timedelta(pred['future_day'], unit='D')
+
+# Plot prediction
 ax3.plot(pred['date'], pred['predicted_discipline'])
-ax3.tick_params(axis='x', rotation=45)
 ax3.set_title("Future Discipline Prediction")
+ax3.tick_params(axis='x', rotation=45)
 
 st.pyplot(fig3, use_container_width=True)
-
 # ---- METRICS ----
 st.subheader("Key Metrics")
 
