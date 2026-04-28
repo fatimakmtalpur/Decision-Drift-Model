@@ -7,9 +7,10 @@ st.set_page_config(page_title="Discipline Model", layout="wide")
 st.title("Decision Drift Model Dashboard")
 
 # ---- LOAD EXISTING FILES (NO RE-SIMULATION) ----
-df = pd.read_csv("discipline_history.csv")
-pred = pd.read_csv("predicted_discipline.csv")
-raw = pd.read_csv("budget_data.csv")
+df = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/discipline_history.csv")
+pred = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/predicted_discipline.csv")
+st.write(pred['predicted_discipline'].describe())
+raw = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/budget_data.csv")
 raw['date'] = pd.to_datetime(raw['date'])
 
 # Convert date
@@ -94,3 +95,7 @@ col1.metric("Current Discipline", round(current, 2))
 col2.metric("Average Discipline", round(avg, 2))
 col3.metric("Avg Deviation", round(dev, 2))
 col4.metric("Status", status)
+
+#for easy accessing
+#C:/Users/MEMONS/Desktop/Financial_model/
+#python -m streamlit run app.py
