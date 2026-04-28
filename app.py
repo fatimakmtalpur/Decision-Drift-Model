@@ -7,10 +7,9 @@ st.set_page_config(page_title="Discipline Model", layout="wide")
 st.title("Decision Drift Model Dashboard")
 
 # ---- LOAD EXISTING FILES (NO RE-SIMULATION) ----
-df = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/discipline_history.csv")
-pred = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/predicted_discipline.csv")
-st.write(pred['predicted_discipline'].describe())
-raw = pd.read_csv("C:/Users/MEMONS/Desktop/Financial_model/budget_data.csv")
+df = pd.read_csv("discipline_history.csv")
+pred = pd.read_csv("predicted_discipline.csv")
+raw = pd.read_csv("budget_data.csv")
 raw['date'] = pd.to_datetime(raw['date'])
 
 # Convert date
